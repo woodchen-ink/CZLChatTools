@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CZLChat 下载页</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    .mdui-card {
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body
+  class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50"
+  style="padding-bottom:280px;">
+  <div class="mdui-appbar mdui-appbar-fixed mdui-valign " style="background-color: #1e3b7a;color:aliceblue">
+    <h1 class="mdui-typo-title mdui-center mdui-p-a-1">CZLChat 下载页</h1>
+  </div>
+  <div class="mdui-container mdui-typo">
+
+    <div class="mdui-m-t-3">
+      <div class="mdui-card mdui-hoverable">
+        <div class="mdui-card-primary">
+          <div class="mdui-card-primary-title">版本1.0.0</div>
+        </div>
+        <div class="mdui-card-content">
+          <div class="mdui-table-fluid">
+            <table class="mdui-table mdui-table-hoverable">
+              <thead>
+                <tr>
+                  <th>系统</th>
+                  <th>下载链接</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Windows</td>
+                  <td><a href="https://cdn.czl.net/czlchat/1.0.0/CZLChat-windows.zip">https://cdn.czl.net/czlchat/1.0.0/CZLChat-windows.zip</a>
+                  </td>
+                  <tr>
+                    <td>Macos</td>
+                    <td><a href="https://cdn.czl.net/czlchat/1.0.0/CZLChat-macos.zip">https://cdn.czl.net/czlchat/1.0.0/CZLChat-macos.zip</a>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+  <div id="spinner-container"
+    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.5); z-index: 100;"
+    class="spinner-container">
+    <div class="mdui-spinner mdui-spinner-colorful"></div>
+  </div>
+
+
+  <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+  <script>
+    // 显示进度指示器的函数
+    function showSpinner() {
+      document.getElementById("spinner-container").style.display = "flex";
+    }
+
+    // 隐藏进度指示器的函数
+    function hideSpinner() {
+      document.getElementById("spinner-container").style.display = "none";
+    }
+    // 在页面加载完成后隐藏进度指示器
+    window.onload = function () {
+      hideSpinner();
+    }
+  </script>
+</body>
+
+</html>

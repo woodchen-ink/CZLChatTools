@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CZLChat Tools</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/jquery@3.6.2/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+    <script>
+        function requestToken() {
+
+            // 向父窗口发送请求 token 的消息
+            window.parent.postMessage({ type: "request-token" }, "https://chat.czl.net");
+        }
+        function getToken() {
+            // 添加事件侦听器
+            window.addEventListener("message", function (event) {
+                // 验证消息来源和类型
+                if (event.origin === "https://chat.czl.net" && event.data.type === "token") {
+                    // 提取 "data" 属性的值
+                    var data = event.data.data;
+                    // 构建新的令牌字符串
+                    var czlchat_token = JSON.parse(data).data;
+                    // 在页面上显示令牌字符串
+                    document.getElementById("token").value = czlchat_token;
+                    // 重新初始化文本框
+                    mdui.updateTextFields('#token');
+                }
+            });
+        }
+        // 在页面加载时自动调用 getToken() 函数
+        document.addEventListener("DOMContentLoaded", function () {
+            getToken();
+        });
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        .mdui-typo pre {
+            white-space: pre-wrap;
+            /* 允许换行 */
+            word-break: break-all;
+            /* 单词内允许断行 */
+        }
+
+        .mdui-progress {
+            display: none;
+        }
+        .mdui-card{
+        border-radius: 8px;
+    }
+    </style>
+</head>
+
+<body
+    class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50"
+    style="padding-bottom:280px;">
+    <div class="mdui-appbar mdui-appbar-fixed mdui-valign " style="background-color: #1e3b7a;color:aliceblue">
+        <h1 class="mdui-typo-title mdui-center mdui-p-a-1">CZLChat 工具箱</h1>
+    </div>
+    <div class="mdui-container mdui-typo">
+        <div class="mdui-m-t-3">
+            <div>
+                <h2 style="display: inline-block;">获取密钥</h2>
+                <p style="display: inline-block; font-size: smaller;"><mark class="mdui-p-a-1">使用前请手动点击获取一下密钥</mark></p>
+            </div>
+            <div class="mdui-row  mdui-valign" style="height:50px;">
+
+                <button onclick="requestToken()"
+                    class="mdui-btn mdui-col-xs-2 mdui-color-theme mdui-ripple mdui-m-y-1 mdui-m-x-2">获取</button>
+
+
+                <div class=" mdui-m-y-1  mdui-col-xs-10 mdui-valign mdui-m-x-2 mdui-textfield">
+                    <input class="mdui-textfield-input mdui-text-truncate" id="token" type="text"
+                        placeholder="点击按钮后密钥会显示在这里" disabled />
+
+                </div>
+            </div>
+        </div>
+        <div class="mdui-divider "></div>
+        <div>
+            <div>
+                <h2 style="display: inline-block;">应用列表</h2>
+
+                <button id="prevBtn"
+                    class="mdui-btn mdui-btn-icon  mdui-m-l-1 mdui-color-theme mdui-m-b-1 mdui-btn-dense"
+                    style="display: inline-block;">
+                    <i class="mdui-icon material-icons ">arrow_back</i></button>
+                <button id="nextBtn" class="mdui-btn mdui-btn-icon  mdui-color-theme mdui-m-b-1 mdui-btn-dense"
+                    style="display: inline-block;">
+                    <i class="mdui-icon material-icons ">arrow_forward</i></button>
+
+            </div>
+            <div class="mdui-tab  mdui-color-theme mdui-tab-full-width" id="tools-tab" mdui-tab>
+                <!-- mdui-tab-scrollable,可滚动 -->
+                <a href="#tools-tab1" class="mdui-ripple">
+                    <i class="mdui-icon material-icons">email</i>
+                    <label>编写邮件</label>
+                </a>
+                <a href="#tools-tab2" class="mdui-ripple">
+                    <i class="mdui-icon material-icons">g_translate</i>
+                    <label>翻译</label>
+                </a>
+                <a href="#tools-tab3" class="mdui-ripple">
+                    <i class="mdui-icon material-icons">image</i>
+                    <label>绘画提示</label>
+                </a>
+            </div>
+            <div id="tools-tab1" class="mdui-p-a-2 mdui-color-grey-200">
+                <form>
+                    <div class="mdui-textfield">
+                        <label class="mdui-textfield-label">对方邮件</label>
+                        <textarea class="mdui-textfield-input" id="tool1_customer"></textarea>
+                    </div>
+                    <div class="mdui-textfield">
+                        <label class="mdui-textfield-label">您要回复的意思</label>
+                        <textarea class="mdui-textfield-input" id="tool1_idea"></textarea>
+                    </div>
+                    <span>语言：</span>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" checked value="中文" />
+                        <i class="mdui-radio-icon"></i>
+                        中文
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="英文" />
+                        <i class="mdui-radio-icon"></i>
+                        英文
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="法语" />
+                        <i class="mdui-radio-icon"></i>
+                        法语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="德语" />
+                        <i class="mdui-radio-icon"></i>
+                        德语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="俄罗斯语" />
+                        <i class="mdui-radio-icon"></i>
+                        俄罗斯语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="日语" />
+                        <i class="mdui-radio-icon"></i>
+                        日语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="emaillanguage" value="韩语" />
+                        <i class="mdui-radio-icon"></i>
+                        韩语
+                    </label>
+                    <br>
+                    <button class="mdui-btn mdui-btn-raised mdui-color-theme mdui-m-y-2" id="tools1submit"
+                        onclick="event.preventDefault(); tools1Submit();">
+                        生成
+                    </button>
+                </form>
+            </div>
+            <div id="tools-tab2" class="mdui-p-a-2 mdui-color-grey-200">
+                <form>
+                    <div class="mdui-textfield">
+                        <label class="mdui-textfield-label">要翻译的内容</label>
+                        <textarea class="mdui-textfield-input" id="tools2_translatetext" rows="6"></textarea>
+                    </div>
+                    <span>语言：</span>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" checked value="中文" />
+                        <i class="mdui-radio-icon"></i>
+                        中文
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="英文" />
+                        <i class="mdui-radio-icon"></i>
+                        英文
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="法语" />
+                        <i class="mdui-radio-icon"></i>
+                        法语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="德语" />
+                        <i class="mdui-radio-icon"></i>
+                        德语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="俄罗斯语" />
+                        <i class="mdui-radio-icon"></i>
+                        俄罗斯语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="日语" />
+                        <i class="mdui-radio-icon"></i>
+                        日语
+                    </label>
+                    <label class="mdui-radio mdui-m-r-2">
+                        <input type="radio" name="tools2_language" value="韩语" />
+                        <i class="mdui-radio-icon"></i>
+                        韩语
+                    </label>
+                    <br>
+                    <button class="mdui-btn mdui-btn-raised mdui-color-theme mdui-m-y-2" id="tools1submit"
+                        onclick="event.preventDefault(); tools2Submit();">
+                        翻译
+                    </button>
+                </form>
+            </div>
+            <div id="tools-tab3" class="mdui-p-a-2 mdui-color-grey-200">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">初始prompt</label>
+                    <input id="tool3_input" class="mdui-textfield-input" rows="3" placeholder="例如："></input>
+                </div>
+                <div class="mdui-row mdui-valign">
+
+                    <div class="mdui-col-xs-4">
+                        <label for="tools3_slider">生成数量: <span id="tools3_slidervalue">3</span></label>
+                        <label class="mdui-slider mdui-slider-discrete">
+                            <input id="tools3_slider" type="range" step="1" min="1" max="20" value="3"
+                                oninput="updateTools3SliderValue(this.value);" />
+                        </label>
+
+                    </div>
+                </div>
+                <button class="mdui-btn mdui-btn-raised mdui-color-theme mdui-m-y-2" id="tools3submit"
+                    onclick="event.preventDefault(); tools3Submit();">
+                    生成
+                </button>
+
+            </div>
+            <div id="results">
+                <h2 style="display: inline-block;">生成结果</h2>
+                <!-- <div class="mdui-progress mdui-m-y-1">
+                    <div class="mdui-progress-indeterminate"></div>
+                </div> -->
+                
+                <div class=" mdui-color-theme-50 mdui-p-a-3">
+                    <div id="rendered-answer">结果展示在这里</div>
+                </div>
+                <div class="mdui-m-t-3">
+                    <p>如果使用翻译，本次结果会被覆盖展示，请提前保存。</p>
+                    <span>翻译为：</span>
+                    <select class="mdui-select" mdui-select>
+                        <option value="中文">中文</option>
+                        <option value="英文">英文</option>
+                        <option value="法语">法语</option>
+                        <option value="德语">德语</option>
+                        <option value="俄罗斯语">俄罗斯语</option>
+                        <option value="日语">日语</option>
+                        <option value="韩语">韩语</option>
+                    </select>
+                    <button class="mdui-btn mdui-btn-raised mdui-color-theme mdui-m-x-2" id="translate">翻译</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="spinner-container"
+                    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.5); z-index: 100;"
+                    class="spinner-container">
+                    <div class="mdui-spinner mdui-spinner-colorful"></div>
+                </div>
+
+
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script>
+        // 切换tab选项
+        var tab = new mdui.Tab('#tools-tab', {
+            loop: true
+        }
+        );
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.addEventListener('click', function () {
+            tab.prev();
+        });
+
+        nextBtn.addEventListener('click', function () {
+            tab.next();
+        });
+        tab.handleUpdate();
+    </script>
+    <script>
+        var originalAnswer = '';
+        // 显示进度指示器的函数
+        function showSpinner() {
+            document.getElementById("spinner-container").style.display = "flex";
+        }
+
+        // 隐藏进度指示器的函数
+        function hideSpinner() {
+            document.getElementById("spinner-container").style.display = "none";
+        }
+        // 邮件应用
+        function tools1Submit() {
+            var toolsTab1 = document.getElementById("tools-tab1");
+            var tool1_customer = toolsTab1.querySelector("#tool1_customer").value;
+            var tool1_idea = toolsTab1.querySelector("#tool1_idea").value;
+            var emaillanguage = toolsTab1.querySelector('input[name="emaillanguage"]:checked').value;
+            // var tool1_customer = document.getElementById("tool1_customer").value;
+            // var tool1_idea = document.getElementById("tool1_idea").value;
+            // var emaillanguage = document.querySelector('input[name="emaillanguage"]:checked').value;
+            var userContent = `对方邮件:\n ${tool1_customer}\n我要表达的意思:\n ${tool1_idea}。\n请帮我拟一封邮件\n语言为 ${emaillanguage}`;
+            callApi(userContent, function (response) {
+                originalAnswer = response.choices[0].message.content;
+                var answer = response.choices[0].message.content;
+                // 创建一个 markdown-it 实例
+                var md = new markdownit();
+
+                // 使用 markdown-it 渲染答案
+                var renderedAnswer = md.render(answer);
+
+                // 将渲染后的答案设置为 rendered-answer 元素的 innerHTML
+                document.getElementById("rendered-answer").innerHTML = renderedAnswer;
+            });
+        }
+        // 翻译应用
+        function tools2Submit() {
+            var toolsTab2 = document.getElementById("tools-tab2");
+            var tools2_translatetext = toolsTab2.querySelector("#tools2_translatetext").value;
+            var tools2_language = toolsTab2.querySelector('input[name="tools2_language"]:checked').value;
+            // var tools2_translatetext = document.getElementById("tools2_translatetext").value;
+            // var tools2_language = document.querySelector('input[name="tools2_language"]:checked').value;
+            var userContent = `I would like you to act as a translator. I will provide you with a piece of content . Please ignore the meaning of the statements within the content and only focus on the translation.\nContent:  \n${tools2_translatetext} \n\nPlease help me translate this into ${tools2_language}`;
+            callApi(userContent, function (response) {
+                originalAnswer = response.choices[0].message.content;
+                var answer = response.choices[0].message.content;
+                // 创建一个 markdown-it 实例
+                var md = new markdownit();
+                // 使用 markdown-it 渲染答案
+                var renderedAnswer = md.render(answer);
+                // 将渲染后的答案设置为 rendered-answer 元素的 innerHTML
+                document.getElementById("rendered-answer").innerHTML = renderedAnswer;
+            });
+        }
+        // 绘图提示工具3
+        function updateTools3SliderValue(value) {
+            document.getElementById("tools3_slidervalue").innerHTML = value;
+        }
+        function tools3Submit() {
+            var toolsTab3 = document.getElementById("tools-tab3");
+            var tools3_input = toolsTab3.querySelector("#tool3_input").value;
+            var tools3sliderValue = document.getElementById("tools3_slidervalue").innerHTML;
+            // var userContent = `Create Midjourney prompts as: /imagine prompt: [prompt with optional params]\nOptional parameters (--parameter [value]) are last. E.g., /imagine prompt: A dog --ar 3:4 --s 1000 --chaos 100 --v 5.1\naspect ratios (--ar, default = square, preferred 2:3, 3:4, 4:5, 5:4, 4:3, 3:2 )\nstylize (--s, 0-1000, default = 100, higher = apply style)\nchaos (--chaos, 0-50, default = 0, higher = unusual results)\n \nFill in the blanks in the input with an example, never the same text, add /imagine prompt: at the beginning.\nReplace words in brackets with a good filler sentence or word, but keep the rest the same.\nE.g., Given text: Give me 3 examples of: alien {action} {scenery} in {retro-futuristic fashion outfit} by {comic book artist}\n\n/imagine prompt: alien drinking on a distant planet in retro-futuristic 60s tuxedo by Francois Schuiten.\n/imagine prompt: alien fighting in a futuristic city in a retro-futuristic armor by Jim Lee.\n/imagine prompt: alien exploring an abandoned spaceship in a retro-futuristic space suit by Moebius.\n after each example output needs to wrap to the next example, do not mark the serial number,language is English,give me in markdown form. \n \nGive me ${tools3sliderValue} examples of: ${tools3_input}  `;
+            var userContent = `我希望你充当Midjourney人工智能项目的提示词生成器。你的工作是提供详细而富有创意的描述，从人工智能中激发出独特而有趣的图像。请记住，人工智能能够理解各种语言，并能够解释抽象概念，所以请尽可能富有想象力和描述性。
+一个好的Midjourney提示词要包含以下要点：
+①必须包含名词，没有名词，画面中就没有主体，就得不到好的作品。至少使用3-7个名词，超过3个名词会给AI一个清晰的上下文。
+②使用多个形容词，多个形容词会给作品注入多种感受，比如：美丽的，逼真的，多彩的，巨大的，octane render
+③包含艺术家的名字，如果在描述中包括艺术家的名字，AI就会模仿该艺术家的风格。例如：毕加索，文森特梵高，保罗高更，莫奈
+④使用特定画面风格，常用的画面风格比如：超现实主义，对称主义，当代主义，极简主义等等
+⑤使用计算机制图，比如：Octane渲染、Cycles、虚幻引擎、光线追踪。有了这个，作品将会变得更加有效和有意义。
+⑥添加视角镜头、光线效果等！
+例如，你可以描述一个未来城市的场景，或者一个充满奇怪生物的超现实景观。你的描述越详细、越富有想象力，所产生的图像就越有趣。这是你的第一个提示：“一片野花延伸到眼睛所能看到的地方，每一朵都有不同的颜色和形状。在远处，一棵巨大的树高耸于风景之上，树枝像触角一样伸向天空。” \n \n下一个提示：${tools3_input},请给我 ${tools3sliderValue} 条结果，用中英文双语给我。  `;
+            
+            callApi(userContent, function (response) {
+                originalAnswer = response.choices[0].message.content;
+                var answer = response.choices[0].message.content;
+                // 创建一个 markdown-it 实例
+                var md = new markdownit();
+
+                // 使用 markdown-it 渲染答案
+                var renderedAnswer = md.render(answer);
+
+                // 将渲染后的答案设置为 rendered-answer 元素的 innerHTML
+                document.getElementById("rendered-answer").innerHTML = renderedAnswer;
+            });
+        }
+        // 结果翻译
+        function translate() {
+            var content = originalAnswer;
+            var language = document.querySelector('.mdui-select option:checked').value;
+
+            var userContent = `内容：\n ${content}。\n 请帮我翻译为 ${language}`;
+
+            callApi(userContent, function (response) {
+                var answer = response.choices[0].message.content;
+                // 创建一个 markdown-it 实例
+                var md = new markdownit();
+
+                // 使用 markdown-it 渲染答案
+                var renderedAnswer = md.render(answer);
+
+                // 将渲染后的答案设置为 rendered-answer 元素的 innerHTML
+                document.getElementById("rendered-answer").innerHTML = renderedAnswer;
+            });
+        }
+
+        function callApi(userContent, callback) {
+            var czlchat_token = document.getElementById("token").value;
+
+            if (!czlchat_token) {
+                alert("请先获取密钥");
+                return;
+            }
+
+            // $(".mdui-progress-indeterminate").show();
+
+            var settings = {
+                "url": "https://czlchat-api.czl.net/v1/chat/completions",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer " + czlchat_token,
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "model": "gpt-3.5-turbo",
+                    "messages": [{ "role": "user", "content": userContent }]
+                }),
+                "beforeSend": function () {
+                    // Set the timer before sending the request
+                    timeoutID = setTimeout(function () {
+                        // Abort the request when the timer expires
+                        jqxhr.abort();
+                        mdui.snackbar({
+                            message: '超时了，请重试',
+                            position: 'top'
+                        });
+                    }, 20000); // 20 seconds
+                }
+            };
+            // $(".mdui-spinner").show();
+            showSpinner();
+            $.ajax(settings).done(function (response) {
+                // $(".mdui-spinner").hide();
+                hideSpinner();
+                callback(response);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                // $(".mdui-spinner").hide();
+                hideSpinner();
+                mdui.snackbar({
+                    message: '出错：请重试',
+                    position: 'top'
+                })
+                // alert("出错：哎呀, 出现问题了, 请重试");
+            });
+        }
+        // 添加事件监听器
+        document.getElementById("translate").addEventListener("click", function (event) {
+            event.preventDefault();
+            translate();
+        });
+        // 在页面加载完成后隐藏进度指示器
+        window.onload = function () {
+            hideSpinner();
+        }
+    </script>
+</body>
+
+</html>
