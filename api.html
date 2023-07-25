@@ -50,8 +50,9 @@
       word-break: break-all;
       /* 单词内允许断行 */
     }
-    .mdui-card{
-        border-radius: 8px;
+
+    .mdui-card {
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -116,84 +117,15 @@
           </div>
         </div>
       </div>
-      <div class="mdui-panel-item">
-        <div class="mdui-panel-item-header mdui-hoverable">
-          <div class="mdui-panel-item-title">CZL 4模型</div>
-          <div class="mdui-panel-item-summary">暂未开放</div>
-          <!-- <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i> -->
-        </div>
-
-      </div>
     </div>
+
 
     <div class="mdui-divider mdui-m-y-2"></div>
     <div class="mdui-m-t-3">
       <h2>使用说明</h2>
-      <div class="mdui-card mdui-hoverable">
-        <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">注意事项</div>
-        </div>
-        <div class="mdui-card-content">
-
-
-
-          <div class="mdui-panel mdui-panel-gapless" mdui-panel="{accordion: true}">
-            <div class="mdui-panel-item ">
-              <div class="mdui-panel-item-header mdui-hoverable">
-                <div class="mdui-panel-item-title">2023年6月16日更新</strong></div>
-                <!-- <div class="mdui-panel-item-summary">即以下方式的请求格式，只支持上面接口说明处的格式</div> -->
-                <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-              </div>
-              <div class="mdui-panel-item-body  mdui-color-grey-50">
-                <div class="mdui-p-y-2 ">
-                  <ol>
-                    <li>6月16日更新，增加流式输出（不过没发现有啥用，反正思源笔记也不支持）。</li>
-                    <li>在notion不能用，可能是我不会，好像notion不支持自定义key和接口，只能使用notion的会员？</li>
-                    <li>
-                      在部分开源的chatgpt项目中无法使用，比如chatgpt-next-web，是因为这个项目自己先自定义发送了一条预定角色信息，接口的确返回了第二次的提问（实际的提问）答案，但是项目里不会显示出来，反而显示在对话标题。如图<img
-                        alt="image.png" src="https://cdn-img.czl.net/2023/06/16/pgb1xm.png" /> </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-            <div class="mdui-panel-item ">
-              <div class="mdui-panel-item-header mdui-hoverable">
-                <div class="mdui-panel-item-title">CZL-3.5模型<strong>不支持上下文对话</strong></div>
-                <div class="mdui-panel-item-summary">即以下方式的请求格式，只支持上面接口说明处的格式</div>
-                <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-              </div>
-              <div class="mdui-panel-item-body  mdui-color-grey-50">
-                <div class="mdui-p-y-2">
-                  <pre>{"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"You are a photographer. "},{"role":"system","content":"You need to output templates related to your field of expertise that will be used to generate prompts by English."},{"role":"user","content":"Give me a creative idea"}],"max_tokens":50,"n":1,"stop":null,"temperature":1}</pre>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mdui-row">
-      <div class="mdui-card mdui-hoverable mdui-col-xs-6 mdui-m-t-2" style="height:220px">
-        <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">使用场景</div>
-        </div>
-        <div class="mdui-card-content ">
-          <ol>
-            <li>可以在诸如：VS CODE、Notion、思源笔记等提供OPENAI接口的软件/插件处使用CZL Chat的服务，无需担心OPENAI封号、稳定等的问题，使用量大的情况下CZL
-              Chat的价格也比OPENAI要更低；</li>
-            <li>自定义开发应用：可使用接口自定义开发应用；</li>
-          </ol>
-        </div>
-      </div>
-      <div class="mdui-card mdui-hoverable mdui-col-xs-6 mdui-m-t-2" style="height:220px">
-        <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">计费说明</div>
-        </div>
-        <div class="mdui-card-content">
-          <p>按照使用token计费,可在登录端点击“头像-账户”处查看消耗记录。
-            <img alt="image" src="https://cdn-img.czl.net/2023/06/14/t0ffti.png" />
-          </p>
-        </div>
+      <div class="mdui-card mdui-hoverable mdui-p-a-2">
+        <a href="https://docs.czl.net/czlchat/API/chat%E6%8E%A5%E5%8F%A3.html"
+          target="_blank">https://docs.czl.net/czlchat/API/chat接口.html</a>
       </div>
     </div>
 
@@ -207,6 +139,7 @@
       </div>
 
     </div>
+  </div>
 
   </div>
   <div id="spinner-container"
