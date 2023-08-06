@@ -64,82 +64,10 @@
     <h1 class="mdui-typo-title mdui-center mdui-p-a-1">CZL Chat API说明</h1>
   </div>
   <div class="mdui-container mdui-typo">
-    <div class="mdui-m-t-3">
-      <div>
-        <h2 style="display: inline-block;">获取密钥</h2>
-        <p style="display: inline-block; font-size: smaller;"><mark
-            class="mdui-p-a-1">密钥有效期为30天，但不是从生成的时候开始算，而是从初次登录开始计算。失效时记得来重新获取一次。</mark></p>
-      </div>
-      <div class="mdui-row  mdui-valign" style="height:50px;">
-
-        <button onclick="requestToken()"
-          class="mdui-btn mdui-col-xs-2 mdui-color-theme mdui-ripple mdui-m-y-1 mdui-m-x-2">获取</button>
-
-
-        <div class=" mdui-m-y-1  mdui-col-xs-10 mdui-valign mdui-m-x-2 mdui-textfield">
-          <i class="mdui-icon material-icons" onclick="copyToken()"
-            mdui-tooltip="{content: '复制密钥', position: 'top'}">content_copy</i>
-          <!--<pre id="token">点击按钮后密钥会显示在这里</pre>-->
-          <input class="mdui-textfield-input mdui-text-truncate" id="token" type="text" placeholder="点击按钮后密钥会显示在这里"
-            disabled />
-
-        </div>
-      </div>
-    </div>
-    <div class="mdui-divider mdui-m-y-2"></div>
-    <div class="mdui-m-t-3">
-      <h2>调用接口</h2>
-      <div class="mdui-panel mdui-panel-gapless " mdui-panel="{accordion: true}">
-        <div class="mdui-panel-item ">
-          <div class="mdui-panel-item-header mdui-hoverable">
-            <div class="mdui-panel-item-title">CZL 3.5模型</div>
-            <div class="mdui-panel-item-summary">接口地址：https://czlchat-api.czl.net/v1/chat/completions</div>
-            <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <div class="mdui-panel-item-body  mdui-color-grey-50">
-            <div class="mdui-p-y-2">
-              <p><strong>请注意该接口不支持上下文关联，但可以自己拼接来达到类似效果；</strong></p>
-              <p><strong>请求方式与OPENAI相同，只是地址不同</strong></p>
-
-              <p>接口地址：<code>https://czlchat-api.czl.net/v1/chat/completions</code></p>
-              <p>
-                携带参数：Bearer+&quot;密钥&quot;,例子：
-              <pre>Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNZW1iZXJJZCI6MTMwNjI3OTI3OTMwMjksIkFjY291bnQiOiIxNTIyMTY1NzUxNSIsIkFj*******Y291bnRUeX******NrTmFtZSI6Indvb2RAY3psLm5ldCIsIkxvZ2luTW9kZSI6MiwiaWF0IjoxNjg2NjQyMDY1LCJuYmYiOjE2ODY2NDIwNjUsImV4cCI6MTY4OTIzNDA2NSwiaXNzIjoiQ1pMQUlDaGF0IiwiYXVkIjoiQ1pMQUlDaGF0In0.cZqLf6qMi6WGIdP_Fhq0</pre>
-
-              <p>
-                请求格式：<code>{&quot;model&quot;:&quot;gpt-3.5-turbo&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;红烧肉的做法&quot;}]}</code>
-              </p>
-              <p>返回格式：</p>
-              <p class="mdui-typo-wrap">
-              <pre>{"id":"*****","object":"chat.completion","created":*****,"model":"gpt-3.5-turbo","usage":{"prompt_tokens":10,"completion_tokens":18,"total_tokens":28},"choices":[{"message":{"role":"assistant","content":"红烧肉是一道非常经典的中国菜肴。下面是简单的做法：\n\n**材料：**\n- 猪肉五花肉（500克）\n- 姜块（4-5片）\n- 葱段（2根）\n- 料酒（适量）\n- 生抽（适量）\n- 红糖（适量）\n- 八角（2-3个）\n- 桂皮（1块）\n- 老抽（适量）\n- 盐（适量）\n- 清水（适量）\n\n**步骤：**\n1. 猪肉洗净切成2厘米见方的块，用开水焯水去掉血水，捞出过冷水冲洗干净。\n2. 热锅凉油，下姜片和葱段爆香，再加入五花肉块煸炒至两面焦黄。\n3. 加入料酒煮至酒精挥发，加入开水淹没肉块，加入适量生抽、老抽、盐、红糖、八角和桂皮（可依个人口味调整）。\n4. 用中小火煮至水分只剩少量时，换小火用砂锅继续炖煮30分钟左右，同时注意搅拌，防止粘锅。\n5. 待汁水炖至浓稠时，关火食用。\n\n注：如果喜欢肉质更加软烂，可以将煮过的肉块拿出来切成小块，再放回锅中继续炖煮。"},"finish_reason":"stop","index":0}]}</pre>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="mdui-valign mdui-center">
+      <h2>已失效，请使用"oapi.czl.net"。<br>如您已充值，并且不打算继续使用czlchat，请联系我司客服进行余额转换。</h2>
     </div>
 
-
-    <div class="mdui-divider mdui-m-y-2"></div>
-    <div class="mdui-m-t-3">
-      <h2>使用说明</h2>
-      <div class="mdui-card mdui-hoverable mdui-p-a-2">
-        <a href="https://docs.czl.net/czlchat/API/chat%E6%8E%A5%E5%8F%A3.html"
-          target="_blank">https://docs.czl.net/czlchat/API/chat接口.html</a>
-      </div>
-    </div>
-
-
-    <div class="mdui-divider mdui-m-y-2"></div>
-    <div class="mdui-m-t-3">
-      <h2>视频说明</h2>
-      <div class="mdui-video-container">
-        <iframe src="//player.bilibili.com/player.html?aid=399850730&bvid=BV1vo4y177Gf&cid=1163978070&page=1"
-          scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-      </div>
-
-    </div>
-  </div>
 
   </div>
   <div id="spinner-container"
